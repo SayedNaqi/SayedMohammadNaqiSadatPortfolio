@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio of Sayed Mohammad Naqi Sadat - Full-Stack Developer specializing in Mobile & Web applications." />
+    <meta name="keywords" content="full-stack developer, React Native, Laravel, mobile development, web development" />
+    <meta name="author" content="Sayed Mohammad Naqi Sadat" />
+    <meta property="og:title" content="Sayed Mohammad Naqi Sadat | Full-Stack Developer" />
+    <meta property="og:description" content="Building seamless digital experiences across mobile and web" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://example.com/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Sayed Mohammad Naqi Sadat | Full-Stack Developer</title>
+
+    <link rel="icon" type="image/png" href="./images/favicon.png" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: { 50: "#eef2ff", 100: "#e0e7ff", 500: "#6366f1", 600: "#4f46e5", 700: "#4338ca", 900: "#312e81" },
+            },
+            fontFamily: { sans: ["Inter", "sans-serif"] },
+            animation: {
+              float: "float 6s ease-in-out infinite",
+              "fade-in": "fadeIn 0.6s ease-out",
+              "slide-up": "slideUp 0.6s ease-out",
+              "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+            keyframes: {
+              float: { "0%, 100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-10px)" } },
+              fadeIn: { "0%": { opacity: "0" }, "100%": { opacity: "1" } },
+              slideUp: { "0%": { transform: "translateY(30px)", opacity: "0" }, "100%": { transform: "translateY(0)", opacity: "1" } },
+            },
+          },
+        },
+      };
+    </script>
+    
+    <!-- Custom CSS -->
+    <style>
+      .gradient-text {
+        background: linear-gradient(135deg, #4f46e5, #06b6d4, #8b5cf6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        background-size: 200% 200%;
+        animation: gradient-shift 8s ease infinite;
+      }
+      @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+      
+      .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+      .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15); }
+      
+      .tech-badge { transition: all 0.2s ease; }
+      .tech-badge:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgb(0 0 0 / 0.1); }
+      
+      .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+      .animate-on-scroll.animated { opacity: 1; transform: translateY(0); }
+      
+      .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+      .mobile-menu.open { max-height: 400px; }
+      
+      .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #4f46e5, #06b6d4, #8b5cf6); z-index: 100; transition: width 0.1s ease; }
+      
+      .nav-link.active { color: #4f46e5; font-weight: 600; position: relative; }
+      .nav-link.active::after { content: ""; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: #4f46e5; border-radius: 2px; }
+      
+      .timeline-item::before { content: ""; position: absolute; left: -29px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: #4f46e5; border: 3px solid #e0e7ff; }
+      .timeline-item::after { content: ""; position: absolute; left: -24px; top: 24px; bottom: -24px; width: 2px; background: #e2e8f0; }
+      .timeline-item:last-child::after { display: none; }
+      
+      .blob { position: absolute; border-radius: 50%; filter: blur(40px); opacity: 0.15; animation: float 8s ease-in-out infinite; }
+      .blob-1 { width: 300px; height: 300px; background: #4f46e5; top: -100px; right: -100px; animation-delay: 0s; }
+      .blob-2 { width: 200px; height: 200px; background: #06b6d4; bottom: -50px; left: -50px; animation-delay: -4s; }
+      @media (max-width: 768px) { .blob { display: none; } }
+      
+      .typing-effect { border-right: 2px solid #4f46e5; animation: blink 1s infinite; display: inline-block; min-height: 1.5em; }
+      @keyframes blink { 0%, 50% { border-color: #4f46e5; } 51%, 100% { border-color: transparent; } }
+      
+      dialog { background: transparent; }
+      dialog::backdrop { background: rgba(0,0,0,0.6); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+      
+      .pdf-container { position: relative; min-height: 60vh; background: #f1f5f9; border-radius: 0.5rem; }
+      .pdf-iframe { width: 100%; height: 60vh; border: 0; border-radius: 0.5rem; display: none; }
+      .pdf-iframe.loaded { display: block; }
+      .pdf-fallback { 
+        position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        background: #f8fafc; border-radius: 0.5rem; padding: 2rem; text-align: center;
+      }
+      .pdf-fallback.hidden { display: none; }
+      .pdf-loading { 
+        position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+        background: rgba(255,255,255,0.95); border-radius: 0.5rem; z-index: 10;
+      }
+      .pdf-loading.hidden { display: none; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .animate-spin { animation: spin 1s linear infinite; }
+      
+      /* Smooth scroll behavior */
+      html { scroll-behavior: smooth; }
+      
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #f1f5f9; }
+      ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+  </head>
+  
+  <body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden">
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-lg border-b border-slate-200/50 z-50 transition-all duration-300" id="navbar">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <a href="#" class="text-xl font-bold gradient-text flex items-center gap-2">
+            <i class="fas fa-code text-brand-600"></i> Sayed.dev
+          </a>
+          
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center space-x-1">
+            <a href="#about" class="nav-link px-4 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 transition">About</a>
+            <a href="#tech" class="nav-link px-4 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 transition">Tech Stack</a>
+            <a href="#projects" class="nav-link px-4 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 transition">Projects</a>
+            <a href="#experience" class="nav-link px-4 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 transition">Experience</a>
+            <a href="#contact" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-lg transition shadow-md hover:shadow-lg">Contact</a>
+          </div>
+          
+          <!-- Mobile Menu Button -->
+          <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-600 hover:text-brand-600 transition" aria-label="Toggle menu">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="mobile-menu md:hidden bg-white/95 backdrop-blur-lg border-t border-slate-200">
+        <div class="px-4 py-4 space-y-1">
+          <a href="#about" class="block py-3 px-4 text-slate-600 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition">About</a>
+          <a href="#tech" class="block py-3 px-4 text-slate-600 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition">Tech Stack</a>
+          <a href="#projects" class="block py-3 px-4 text-slate-600 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition">Projects</a>
+          <a href="#experience" class="block py-3 px-4 text-slate-600 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition">Experience</a>
+          <a href="#contact" class="block py-3 px-4 mt-2 text-center bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-lg transition">Let's Connect</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      
+      <div class="max-w-6xl mx-auto text-center relative z-10">
+        <div class="animate-on-scroll" id="heroContent">
+          <span class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold tracking-wide text-brand-700 bg-brand-100/80 rounded-full mb-6 border border-brand-200">
+            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            Available for opportunities
+          </span>
+          
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+            Hi, I'm <br class="sm:hidden" /><span class="gradient-text">Sayed Mohammad Naqi Sadat</span>
+          </h1>
+          
+          <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+            <span id="typingText" class="typing-effect"></span>
+          </p>
+          
+          <p class="text-slate-500 max-w-xl mx-auto mb-10">
+            Building seamless digital experiences across mobile and web with clean architecture, modern tools, and user-first design. 🚀
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <a href="#projects" class="group px-7 py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+              View My Work
+              <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            
+            <div class="flex gap-2 justify-center">
+              <button onclick="openCVModal()" class="px-7 py-3.5 bg-white border border-slate-300 hover:border-brand-500 text-slate-700 font-semibold rounded-xl transition shadow-sm hover:shadow-md flex items-center justify-center gap-2">
+                <i class="fas fa-eye text-brand-600"></i> Preview CV
+              </button>
+              <a href="CV.pdf" download="Sayed-Mohammad-Naqi-Sadat-CV.pdf" class="px-7 py-3.5 bg-white border border-slate-300 hover:border-brand-500 text-slate-700 font-semibold rounded-xl transition shadow-sm hover:shadow-md flex items-center justify-center gap-2">
+                <i class="fas fa-download text-brand-600"></i> Download CV
+              </a>
+            </div>
+          </div>
+
+          <!-- CV Preview Modal -->
+          <dialog id="cvPreview" class="p-0 rounded-2xl border-0 shadow-2xl max-w-4xl w-full mx-auto">
+            <div class="bg-white rounded-2xl overflow-hidden max-h-[90vh] flex flex-col">
+              <!-- Modal Header -->
+              <div class="flex justify-between items-center p-4 border-b border-slate-200 bg-slate-50">
+                <h3 class="font-semibold text-slate-700 flex items-center gap-2">
+                  <i class="fas fa-file-pdf text-red-500"></i> CV Preview
+                </h3>
+                <button onclick="closeCVModal()" class="p-2 hover:bg-slate-200 rounded-lg transition" aria-label="Close">
+                  <i class="fas fa-times text-slate-500"></i>
+                </button>
+              </div>
+              
+              <!-- Modal Content -->
+              <div class="flex-1 overflow-auto p-4 bg-slate-100">
+                <div class="pdf-container relative">
+                  <!-- Loading State -->
+                  <div id="pdfLoading" class="pdf-loading">
+                    <i class="fas fa-circle-notch animate-spin text-3xl text-brand-600"></i>
+                    <span class="ml-3 text-slate-600">Loading CV...</span>
+                  </div>
+                  
+                  <!-- PDF iframe -->
+                  <iframe id="pdfFrame" class="pdf-iframe" title="CV Preview"></iframe>
+                  
+                  <!-- Error Fallback -->
+                  <div id="pdfFallback" class="pdf-fallback hidden">
+                    <i class="fas fa-exclamation-triangle text-5xl text-amber-400 mb-4"></i>
+                    <p class="text-slate-600 font-medium mb-2">Unable to preview PDF</p>
+                    <p class="text-slate-500 text-sm mb-6">Please download to view the file</p>
+                    <a href="CV.pdf" download class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-lg transition">
+                      <i class="fas fa-download"></i> Download CV
+                    </a>
+                  </div>
+                </div>
+                
+                <!-- Helper Links -->
+                <div class="mt-4 text-center space-y-2">
+                  <a href="CV.pdf" target="_blank" class="text-sm text-brand-600 hover:text-brand-700 font-medium inline-flex items-center gap-1">
+                    <i class="fas fa-external-link-alt"></i> Open in new tab
+                  </a>
+                  <p class="text-xs text-slate-400">File: CV.pdf • <span id="fileStatus">Checking...</span></p>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+          <!-- Social Links -->
+          <div class="flex justify-center gap-6">
+            <a href="https://linkedin.com/in/sayedmohammadnaqisadat" target="_blank" rel="noopener" class="group p-3 bg-white rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-slate-200" aria-label="LinkedIn">
+              <i class="fab fa-linkedin text-2xl text-slate-500 group-hover:text-blue-600 transition-colors"></i>
+            </a>
+            <a href="https://github.com/SayedNaqi" target="_blank" rel="noopener" class="group p-3 bg-white rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-slate-200" aria-label="GitHub">
+              <i class="fab fa-github text-2xl text-slate-500 group-hover:text-slate-900 transition-colors"></i>
+            </a>
+            <a href="mailto:sayedmohammadnaqisadat@gmail.com" class="group p-3 bg-white rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-slate-200" aria-label="Email">
+              <i class="fas fa-envelope text-2xl text-slate-500 group-hover:text-red-500 transition-colors"></i>
+            </a>
+            <a href="#" class="group p-3 bg-white rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-slate-200" aria-label="Portfolio">
+              <i class="fas fa-globe text-2xl text-slate-500 group-hover:text-brand-600 transition-colors"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block">
+        <a href="#about" class="p-2 text-slate-400 hover:text-brand-600 transition" aria-label="Scroll down">
+          <i class="fas fa-chevron-down text-xl"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="animate-on-scroll order-2 lg:order-1">
+            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+              <span class="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center">
+                <i class="fas fa-user text-brand-600"></i>
+              </span>
+              About Me
+            </h2>
+            <p class="text-slate-600 leading-relaxed mb-6">
+              I'm a passionate <span class="font-semibold text-brand-600">Full-Stack Developer</span> specializing in building cross-platform mobile apps with <strong>React Native (Expo)</strong> and robust web applications with <strong>Laravel</strong>. I believe in writing clean, maintainable code and creating intuitive user experiences.
+            </p>
+            <p class="text-slate-600 leading-relaxed mb-8">
+              With experience in both frontend and backend development, I can take a project from concept to deployment. I'm constantly learning new technologies and love solving complex problems with elegant solutions.
+            </p>
+            <div class="grid grid-cols-2 gap-4 mb-8">
+              <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                <div class="text-2xl font-bold text-brand-600 mb-1">2+</div>
+                <div class="text-sm text-slate-500">Years Experience</div>
+              </div>
+              <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                <div class="text-2xl font-bold text-brand-600 mb-1">15+</div>
+                <div class="text-sm text-slate-500">Projects Completed</div>
+              </div>
+            </div>
+            <a href="#contact" class="inline-flex items-center gap-2 text-brand-600 font-semibold hover:text-brand-700 transition group">
+              Let's work together <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+          
+          <div class="relative animate-on-scroll order-1 lg:order-2">
+            <div class="relative">
+              <div class="w-64 h-64 sm:w-80 sm:h-80 mx-auto rounded-2xl bg-gradient-to-br from-brand-500 to-cyan-500 p-1 shadow-2xl">
+                <div class="w-full h-full rounded-xl bg-white flex items-center justify-center overflow-hidden">
+                  <img src="./images/profile.png" alt="Sayed Mohammad Naqi Sadat" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<i class=\'fas fa-user text-6xl text-slate-300\'></i>'" />
+                </div>
+              </div>
+              <div class="absolute -top-4 -right-4 sm:-right-8 bg-white px-4 py-2 rounded-xl shadow-lg border border-slate-200 animate-float">
+                <div class="flex items-center gap-2">
+                  <i class="fas fa-code text-brand-600"></i>
+                  <span class="text-sm font-medium">Clean Code</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech" class="py-20 bg-slate-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 animate-on-scroll">
+          <h2 class="text-3xl font-bold mb-4">🛠 Tech Stack</h2>
+          <p class="text-slate-600 max-w-2xl mx-auto">Tools and technologies I use to build modern, scalable applications</p>
+        </div>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fab fa-react text-4xl text-blue-500 mb-3"></i><p class="font-medium text-sm">React Native</p>
+          </div>
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fas fa-mobile-screen-button text-4xl text-purple-600 mb-3"></i><p class="font-medium text-sm">Expo</p>
+          </div>
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fab fa-js text-4xl text-yellow-500 mb-3"></i><p class="font-medium text-sm">JavaScript</p>
+          </div>
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fas fa-code text-4xl text-blue-600 mb-3"></i><p class="font-medium text-sm">TypeScript</p>
+          </div>
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fab fa-css3-alt text-4xl text-cyan-500 mb-3"></i><p class="font-medium text-sm">Tailwind CSS</p>
+          </div>
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fas fa-wind text-4xl text-gray-700 mb-3"></i><p class="font-medium text-sm">NativeWind</p>
+          </div>
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fab fa-php text-4xl text-indigo-600 mb-3"></i><p class="font-medium text-sm">PHP</p>
+          </div>
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fab fa-laravel text-4xl text-red-600 mb-3"></i><p class="font-medium text-sm">Laravel</p>
+          </div>
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fab fa-node-js text-4xl text-green-600 mb-3"></i><p class="font-medium text-sm">Node.js</p>
+          </div>
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fab fa-git-alt text-4xl text-orange-600 mb-3"></i><p class="font-medium text-sm">Git</p>
+          </div>
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fas fa-database text-4xl text-slate-600 mb-3"></i><p class="font-medium text-sm">MySQL</p>
+          </div>
+          <div class="tech-badge bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center animate-on-scroll">
+            <i class="fas fa-server text-4xl text-slate-600 mb-3"></i><p class="font-medium text-sm">REST APIs</p>
+          </div>
+        </div>
+        
+        <div class="mt-12 grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto animate-on-scroll">
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
+            <div class="text-3xl font-bold text-brand-600 mb-2">Mobile</div>
+            <p class="text-slate-500 text-sm">React Native • Expo • NativeWind • iOS/Android</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
+            <div class="text-3xl font-bold text-brand-600 mb-2">Web</div>
+            <p class="text-slate-500 text-sm">React • Laravel • Tailwind • Responsive Design</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
+            <div class="text-3xl font-bold text-brand-600 mb-2">Backend</div>
+            <p class="text-slate-500 text-sm">PHP • Laravel • REST APIs • Database Design</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 animate-on-scroll">
+          <h2 class="text-3xl font-bold mb-4">💼 Featured Projects</h2>
+          <p class="text-slate-600 max-w-2xl mx-auto">A selection of projects showcasing my skills in mobile and web development</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Project 1: Hostel Management App -->
+          <div class="card-hover bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 animate-on-scroll group">
+            <div class="relative h-56 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 overflow-hidden">
+              <div class="absolute inset-0 bg-black/20"></div>
+              <div class="absolute inset-0 flex items-center justify-center text-white text-6xl opacity-20 group-hover:opacity-30 transition-opacity"><i class="fas fa-ticket-alt"></i></div>
+              <div class="absolute bottom-4 left-4 right-4"><span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-xs rounded-full"><i class="fas fa-mobile-alt mr-1"></i> Mobile App</span></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 flex items-center gap-2"><i class="fas fa-ticket-alt text-brand-600"></i> Hostel Management App</h3>
+              <p class="text-slate-600 mb-4 text-sm leading-relaxed">A cross-platform mobile application for managing hostel operations with real-time tracking, secure authentication, and offline capabilities.</p>
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium">React Native</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs rounded-full font-medium">Expo</span>
+                <span class="px-3 py-1 bg-slate-200 text-slate-700 text-xs rounded-full font-medium">TypeScript</span>
+                <span class="px-3 py-1 bg-cyan-100 text-cyan-700 text-xs rounded-full font-medium">NativeWind</span>
+              </div>
+              <div class="flex flex-wrap gap-3">
+                <a href="https://github.com/SayedNaqi/hostel-app" class="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700 transition group/link"><i class="fas fa-external-link-alt group-hover/link:translate-x-0.5 transition-transform"></i> Live Demo</a>
+                <a href="https://github.com/SayedNaqi/hostel-app" class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-slate-800 transition group/link"><i class="fab fa-github group-hover/link:translate-x-0.5 transition-transform"></i> Source Code</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: Jewelry E-Commerce -->
+          <div class="card-hover bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 animate-on-scroll group">
+            <div class="relative h-56 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 overflow-hidden">
+              <div class="absolute inset-0 bg-black/20"></div>
+              <div class="absolute inset-0 flex items-center justify-center text-white text-6xl opacity-20 group-hover:opacity-30 transition-opacity"><i class="fas fa-gem"></i></div>
+              <div class="absolute bottom-4 left-4 right-4"><span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-xs rounded-full"><i class="fas fa-desktop mr-1"></i> Web Application</span></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 flex items-center gap-2"><i class="fas fa-gem text-amber-600"></i> Jewelry E-Commerce Store</h3>
+              <p class="text-slate-600 mb-4 text-sm leading-relaxed">A fully responsive luxury jewelry e-commerce platform with advanced product filtering, secure payment integration, and an intuitive admin dashboard.</p>
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="px-3 py-1 bg-red-100 text-red-700 text-xs rounded-full font-medium">Laravel</span>
+                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs rounded-full font-medium">PHP</span>
+                <span class="px-3 py-1 bg-cyan-100 text-cyan-700 text-xs rounded-full font-medium">Tailwind CSS</span>
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-medium">MySQL</span>
+              </div>
+              <div class="flex flex-wrap gap-3">
+                <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700 transition group/link"><i class="fas fa-external-link-alt group-hover/link:translate-x-0.5 transition-transform"></i> Live Site</a>
+                <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-slate-800 transition group/link"><i class="fab fa-github group-hover/link:translate-x-0.5 transition-transform"></i> Source Code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-12 animate-on-scroll">
+          <a href="https://github.com/SayedNaqi" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-xl transition"><i class="fab fa-github"></i> View All Projects on GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-slate-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 animate-on-scroll">
+          <h2 class="text-3xl font-bold mb-4">💼 Experience & Goals</h2>
+          <p class="text-slate-600">My journey and what I'm working towards</p>
+        </div>
+        
+        <div class="relative pl-8 md:pl-0">
+          <div class="space-y-8">
+            <!-- Item 1 -->
+            <div class="timeline-item relative animate-on-scroll">
+              <div class="md:ml-12">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                  <h3 class="text-lg font-bold">Full-Stack Developer</h3>
+                  <span class="text-sm text-slate-500 bg-slate-200 px-3 py-1 rounded-full mt-1 sm:mt-0">2023 - Present</span>
+                </div>
+                <p class="text-brand-600 font-medium mb-3">Freelance / Personal Projects</p>
+                <p class="text-slate-600 text-sm leading-relaxed">Building cross-platform mobile apps with React Native and robust web applications with Laravel. Focused on clean architecture, performance optimization, and delivering user-centric solutions.</p>
+              </div>
+            </div>
+            
+            <!-- Item 2 -->
+            <div class="timeline-item relative animate-on-scroll">
+              <div class="md:ml-12">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                  <h3 class="text-lg font-bold">Learning & Growth</h3>
+                  <span class="text-sm text-slate-500 bg-slate-200 px-3 py-1 rounded-full mt-1 sm:mt-0">Ongoing</span>
+                </div>
+                <p class="text-brand-600 font-medium mb-3">Current Focus Areas</p>
+                <ul class="text-slate-600 text-sm space-y-2">
+                  <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Advanced React Native performance optimization & state management</li>
+                  <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Test-driven development with Laravel & Node.js</li>
+                  <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Contributing to open-source projects & technical writing</li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- Item 3 -->
+            <div class="timeline-item relative animate-on-scroll">
+              <div class="md:ml-12">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                  <h3 class="text-lg font-bold">What's Next</h3>
+                  <span class="text-sm text-slate-500 bg-slate-200 px-3 py-1 rounded-full mt-1 sm:mt-0">2024+</span>
+                </div>
+                <p class="text-brand-600 font-medium mb-3">Goals & Aspirations</p>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div class="p-4 bg-white rounded-lg border border-slate-200"><i class="fas fa-rocket text-brand-600 mb-2"></i><p class="text-sm font-medium">Launch production apps used by 10k+ users</p></div>
+                  <div class="p-4 bg-white rounded-lg border border-slate-200"><i class="fas fa-users text-brand-600 mb-2"></i><p class="text-sm font-medium">Collaborate with amazing teams on impactful projects</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 animate-on-scroll">
+          <h2 class="text-3xl font-bold mb-4">📫 Let's Connect</h2>
+          <p class="text-slate-600 max-w-xl mx-auto">I'm always open to discussing new opportunities, collaborations, or just having a chat about tech!</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8 animate-on-scroll">
+          <!-- Contact Info -->
+          <div class="space-y-6">
+            <div class="flex items-start gap-4 p-5 bg-slate-50 rounded-xl border border-slate-200">
+              <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-envelope text-brand-600 text-xl"></i></div>
+              <div><h4 class="font-semibold mb-1">Email</h4><a href="mailto:sayedmohammadnaqisadat@gmail.com" class="text-slate-600 hover:text-brand-600 transition text-sm">sayedmohammadnaqisadat@gmail.com</a></div>
+            </div>
+            <div class="flex items-start gap-4 p-5 bg-slate-50 rounded-xl border border-slate-200">
+              <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-map-marker-alt text-brand-600 text-xl"></i></div>
+              <div><h4 class="font-semibold mb-1">Location</h4><p class="text-slate-600 text-sm">Afghanistan • Remote Friendly</p></div>
+            </div>
+            <div class="flex items-start gap-4 p-5 bg-slate-50 rounded-xl border border-slate-200">
+              <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-clock text-brand-600 text-xl"></i></div>
+              <div><h4 class="font-semibold mb-1">Response Time</h4><p class="text-slate-600 text-sm">Usually within 24 hours</p></div>
+            </div>
+            <div class="flex gap-4 pt-4">
+              <a href="https://linkedin.com/in/sayedmohammadnaqisadat" target="_blank" rel="noopener" class="flex-1 flex items-center justify-center gap-2 py-3 bg-slate-100 hover:bg-slate-200 rounded-xl transition text-sm font-medium"><i class="fab fa-linkedin text-blue-600"></i> LinkedIn</a>
+              <a href="https://github.com/SayedNaqi" target="_blank" rel="noopener" class="flex-1 flex items-center justify-center gap-2 py-3 bg-slate-100 hover:bg-slate-200 rounded-xl transition text-sm font-medium"><i class="fab fa-github text-slate-800"></i> GitHub</a>
+            </div>
+          </div>
+          
+          <!-- Contact Form -->
+          <form class="space-y-4" onsubmit="event.preventDefault(); alert('Thank you! This is a demo form. Please contact me via email.');">
+            <div><label class="block text-sm font-medium text-slate-700 mb-2">Name</label><input type="text" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" placeholder="Your name" /></div>
+            <div><label class="block text-sm font-medium text-slate-700 mb-2">Email</label><input type="email" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" placeholder="your@email.com" /></div>
+            <div><label class="block text-sm font-medium text-slate-700 mb-2">Message</label><textarea required rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition resize-none" placeholder="Tell me about your project..."></textarea></div>
+            <button type="submit" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl transition shadow-md hover:shadow-lg flex items-center justify-center gap-2">Send Message <i class="fas fa-paper-plane"></i></button>
+            <p class="text-xs text-slate-500 text-center">🔒 This is a demo form. For real inquiries, please use email or LinkedIn.</p>
+          </form>
+        </div>
+        
+        <!-- Quote -->
+        <blockquote class="mt-16 text-center animate-on-scroll">
+          <div class="inline-block p-6 bg-gradient-to-r from-brand-50 to-cyan-50 rounded-2xl border border-brand-100">
+            <i class="fas fa-quote-left text-brand-400 text-2xl mb-3"></i>
+            <p class="text-slate-700 italic leading-relaxed max-w-2xl mx-auto">"Clean code, thoughtful architecture, and user-first design drive everything I build. Let's create something amazing together."</p>
+            <footer class="mt-4 text-sm text-slate-500 font-medium">— Sayed Mohammad Naqi Sadat</footer>
+          </div>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8 items-center">
+          <div class="text-center md:text-left">
+            <a href="#" class="text-xl font-bold gradient-text inline-flex items-center gap-2 mb-3"><i class="fas fa-code text-brand-500"></i> Sayed.dev</a>
+            <p class="text-sm">Building digital experiences with passion & precision.</p>
+          </div>
+          <div class="flex justify-center gap-6">
+            <a href="#about" class="text-sm hover:text-white transition">About</a>
+            <a href="#tech" class="text-sm hover:text-white transition">Tech</a>
+            <a href="#projects" class="text-sm hover:text-white transition">Projects</a>
+            <a href="#contact" class="text-sm hover:text-white transition">Contact</a>
+          </div>
+          <div class="text-center md:text-right">
+            <div class="flex justify-center md:justify-end gap-4 mb-4">
+              <a href="https://linkedin.com/in/sayedmohammadnaqisadat" target="_blank" rel="noopener" class="p-2 hover:text-white transition" aria-label="LinkedIn"><i class="fab fa-linkedin text-xl"></i></a>
+              <a href="https://github.com/SayedNaqi" target="_blank" rel="noopener" class="p-2 hover:text-white transition" aria-label="GitHub"><i class="fab fa-github text-xl"></i></a>
+              <a href="mailto:sayedmohammadnaqisadat@gmail.com" class="p-2 hover:text-white transition" aria-label="Email"><i class="fas fa-envelope text-xl"></i></a>
+            </div>
+            <p class="text-xs">&copy; <span id="year"></span> Sayed Mohammad Naqi Sadat. All rights reserved.</p>
+          </div>
+        </div>
+        <div class="mt-8 pt-8 border-t border-slate-800 text-center text-xs">
+          <p>Built with ❤️ using Tailwind CSS • <a href="#" class="hover:text-white transition">View Source</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Update year in footer
+      document.getElementById("year").textContent = new Date().getFullYear();
+      
+      // ===== Mobile Menu Toggle =====
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      mobileMenuBtn?.addEventListener("click", () => {
+        mobileMenu.classList.toggle("open");
+        const icon = mobileMenuBtn.querySelector("i");
+        icon?.classList.toggle("fa-bars");
+        icon?.classList.toggle("fa-times");
+      });
+      document.querySelectorAll("#mobileMenu a").forEach(link => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("open");
+          mobileMenuBtn.querySelector("i").classList.add("fa-bars");
+          mobileMenuBtn.querySelector("i").classList.remove("fa-times");
+        });
+      });
+
+      // ===== Scroll Progress Bar =====
+      const progressBar = document.getElementById("progressBar");
+      window.addEventListener("scroll", () => {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (scrollTop / scrollHeight) * 100;
+        progressBar.style.width = scrolled + "%";
+      });
+
+      // ===== Active Navigation Link =====
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll(".nav-link");
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          if (pageYOffset >= sectionTop) current = section.getAttribute("id");
+        });
+        navLinks.forEach(link => {
+          link.classList.remove("active");
+          if (link.getAttribute("href").slice(1) === current) link.classList.add("active");
+        });
+      });
+
+      // ===== Scroll Animations (Intersection Observer) =====
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animated");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+      document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
+
+      // ===== Typing Effect =====
+      const typingTexts = ["Full-Stack Developer (Mobile + Web) 👨‍💻", "React Native & Laravel Expert 🚀", "Building seamless digital experiences ✨"];
+      let textIndex = 0, charIndex = 0, isDeleting = false;
+      const typingElement = document.getElementById("typingText");
+      
+      function typeEffect() {
+        const currentText = typingTexts[textIndex];
+        if (isDeleting) {
+          typingElement.textContent = currentText.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          typingElement.textContent = currentText.substring(0, charIndex + 1);
+          charIndex++;
+        }
+        let typeSpeed = isDeleting ? 50 : 100;
+        if (!isDeleting && charIndex === currentText.length) { typeSpeed = 2000; isDeleting = true; }
+        else if (isDeleting && charIndex === 0) { isDeleting = false; textIndex = (textIndex + 1) % typingTexts.length; typeSpeed = 500; }
+        setTimeout(typeEffect, typeSpeed);
+      }
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("heroContent")?.classList.add("animated");
+          typeEffect();
+        }, 300);
+      });
+
+      // ===== Smooth Scroll for Anchor Links =====
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      // ===== Navbar Background on Scroll =====
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("shadow-sm");
+          navbar.classList.replace("bg-white/80", "bg-white/95");
+        } else {
+          navbar.classList.remove("shadow-sm");
+          navbar.classList.replace("bg-white/95", "bg-white/80");
+        }
+      });
+
+      // ===== CV Modal Functions =====
+      function openCVModal() {
+        const modal = document.getElementById('cvPreview');
+        const iframe = document.getElementById('pdfFrame');
+        const fallback = document.getElementById('pdfFallback');
+        const loading = document.getElementById('pdfLoading');
+        const status = document.getElementById('fileStatus');
+        
+        // Reset states
+        iframe.classList.remove('loaded');
+        fallback.classList.add('hidden');
+        loading.classList.remove('hidden');
+        iframe.src = '';
+        status.textContent = 'Checking...';
+        status.className = 'text-slate-400';
+        
+        // Show modal
+        if (modal.showModal) {
+          modal.showModal();
+        } else {
+          modal.style.display = 'block';
+        }
+        
+        // Check if file exists and load
+        checkPDFFile().then(exists => {
+          if (exists) {
+            status.textContent = 'Found ✓';
+            status.className = 'text-green-500';
+            setTimeout(() => {
+              // Add timestamp to bypass cache
+              iframe.src = 'CV.pdf#' + Date.now();
+            }, 300);
+          } else {
+            status.textContent = 'Not found ✗';
+            status.className = 'text-red-500';
+            showPDFError('File not found: CV.pdf');
+          }
+        }).catch(() => {
+          status.textContent = 'Error ✗';
+          status.className = 'text-red-500';
+          showPDFError('Could not verify file');
+        });
+      }
+
+      function closeCVModal() {
+        const modal = document.getElementById('cvPreview');
+        const iframe = document.getElementById('pdfFrame');
+        
+        if (modal.close) {
+          modal.close();
+        } else {
+          modal.style.display = 'none';
+        }
+        // Clear iframe to free memory
+        iframe.src = '';
+        iframe.classList.remove('loaded');
+      }
+
+      function onPDFLoad() {
+        document.getElementById('pdfLoading').classList.add('hidden');
+        document.getElementById('pdfFrame').classList.add('loaded');
+        document.getElementById('pdfFallback').classList.add('hidden');
+      }
+
+      function onPDFError() {
+        showPDFError('Failed to load PDF');
+      }
+
+      function showPDFError(message) {
+        document.getElementById('pdfLoading').classList.add('hidden');
+        document.getElementById('pdfFrame').classList.remove('loaded');
+        
+        const fallback = document.getElementById('pdfFallback');
+        fallback.classList.remove('hidden');
+        const errorText = fallback.querySelector('p:first-of-type');
+        if (errorText) errorText.textContent = message;
+      }
+
+      async function checkPDFFile() {
+        try {
+          const response = await fetch('CV.pdf', { method: 'HEAD', cache: 'no-store' });
+          return response.ok;
+        } catch {
+          return false;
+        }
+      }
+
+      // Close modal when clicking outside
+      document.getElementById('cvPreview')?.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                           rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+        if (!isInDialog) closeCVModal();
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          const modal = document.getElementById('cvPreview');
+          if (modal.open || modal.style.display === 'block') {
+            closeCVModal();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
