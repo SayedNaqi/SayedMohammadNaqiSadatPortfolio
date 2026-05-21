@@ -614,7 +614,7 @@
     </footer>
 
     <!-- JavaScript -->
-    <script>
+    <script defer src="/<unique-path>/script.js">
       // Update year in footer
       document.getElementById("year").textContent = new Date().getFullYear();
       
@@ -842,6 +842,10 @@
           }
         }
       });
+
+      
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+
     </script>
   </body>
 </html>
